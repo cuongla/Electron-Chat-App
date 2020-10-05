@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Navbar from './components/Navbar';
 import HomeView from './view/Home';
 import SettingsView from './view/Settings';
 import WelcomeView from './view/Welcome';
@@ -35,7 +34,6 @@ function ChatApp() {
 
     return (
         <Router>
-            <Navbar />
             <ContentWrapper>
                 <Switch>
                     <Route path="/" exact>
