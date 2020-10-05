@@ -6,6 +6,7 @@ import { registerUser } from '../actions/auth';
 export default function RegisterForm() {
     const { register, handleSubmit } = useForm();
     const dispatch = useDispatch();
+    const error = useSelector(({ auth }) => auth.login.error);
 
     const onSubmit = registerData => {
         dispatch(registerUser(registerData))
@@ -55,6 +56,7 @@ export default function RegisterForm() {
                         className="form-control"
                         id="password" />
                 </div>
+                {error && <div className="alert alert-danger small">{error.message}</div>}
                 <button type="submit" className="btn btn-outline-primary">Register</button>
             </div>
         </form>
