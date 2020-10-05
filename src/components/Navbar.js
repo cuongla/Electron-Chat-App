@@ -23,9 +23,9 @@ export default function NavBar({ canGoBack }) {
             </Link>
                 </div>
                 <div className="chat-navbar-inner-right">
-                    <Link
+                    {!user && <Link
                         to="/"
-                        className="btn btn-outline-success ml-2">Login</Link>
+                        className="btn btn-outline-success ml-2">Login</Link>}
                     {user &&
                         <>
                             <img className="avatar mr-2" src={user.avatar}></img>
