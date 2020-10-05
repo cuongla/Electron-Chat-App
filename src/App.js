@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import HomeView from './view/Home';
 import SettingsView from './view/Settings';
@@ -14,8 +14,16 @@ import {
     Switch,
     Route
 } from 'react-router-dom';
+//actions
+import { listenToAuthChanges } from './actions/auth';
+
 
 export default function App() {
+
+    useEffect(() => {
+        store.dispatch(listenToAuthChanges());
+    }, [])
+
     return (
         <Provider store={store}>
             <Router>

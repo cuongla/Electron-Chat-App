@@ -8,7 +8,6 @@ export default function RegisterForm() {
     const dispatch = useDispatch();
 
     const onSubmit = registerData => {
-        console.log(registerData);
         dispatch(registerUser(registerData))
     };
 

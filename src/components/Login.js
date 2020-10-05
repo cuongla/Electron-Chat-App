@@ -1,11 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../actions/auth';
 
 export default function LoginForm() {
-    const { loginInput, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm();
+    const dispatch = useDispatch();
 
-    const onSubmit = data => {
-        alert(JSON.stringify(data));
+    const onSubmit = formData => {
+        dispatch(loginUser(formData));
     }
 
     return (
@@ -16,7 +19,7 @@ export default function LoginForm() {
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input
-                        ref={loginInput}
+                        ref={register}
                         type="email"
                         className="form-control"
                         id="email"
@@ -27,7 +30,7 @@ export default function LoginForm() {
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input
-                        ref={loginInput}
+                        ref={register}
                         type="password"
                         name="password"
                         className="form-control"
