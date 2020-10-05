@@ -2,14 +2,22 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../actions/auth';
+import LoadingView from '../components/shared/LoadingView';
 
-export default function LoginForm() {
+
+export default function Login() {
     const { register, handleSubmit } = useForm();
     const dispatch = useDispatch();
     const error = useSelector(({ auth }) => auth.login.error);
+    const isChecking = useSelector(({ auth }) => auth.login.isChecking);
+
 
     const onSubmit = formData => {
         dispatch(loginUser(formData));
+    }
+
+    if (isChecking) {
+        return <LoadingView />
     }
 
     return (

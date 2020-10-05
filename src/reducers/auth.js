@@ -1,26 +1,23 @@
 import {
     USER_LOGIN_SUCCESS,
     USER_REGISTER_SUCCESS,
-    AUTH_ON_INIT,
     AUTH_ON_SUCCESS,
+    AUTH_ON_INIT,
     AUTH_ON_ERROR,
-    USER_LOGIN,
-    USER_REGISTER,
-    AUTH_ON
 } from '../actions/types';
 import { combineReducers } from 'redux';
 import { createErrorReducer, createIsFetchingReducer } from './common';
 
 const createLoginReducer = () =>
     combineReducers({
-        isChecking: createIsFetchingReducer(USER_LOGIN),
-        error: createErrorReducer(USER_LOGIN)
+        isChecking: createIsFetchingReducer(`USER_LOGIN`),
+        error: createErrorReducer(`USER_LOGIN`)
     })
 
 const createRegisterReducer = () =>
     combineReducers({
-        isChecking: createIsFetchingReducer(USER_REGISTER),
-        error: createErrorReducer(USER_REGISTER)
+        isChecking: createIsFetchingReducer(`USER_REGISTER`),
+        error: createErrorReducer(`USER_REGISTER`)
     })
 
 function createAuthReducer() {
@@ -40,7 +37,7 @@ function createAuthReducer() {
 
     return combineReducers({
         user,
-        isChecking: createIsFetchingReducer(AUTH_ON),
+        isChecking: createIsFetchingReducer(`AUTH_ON`),
         login: createLoginReducer(),
         register: createRegisterReducer()
     })

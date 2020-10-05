@@ -1,16 +1,23 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../actions/auth';
+import LoadingView from '../components/shared/LoadingView';
 
-export default function RegisterForm() {
+export default function Register() {
     const { register, handleSubmit } = useForm();
     const dispatch = useDispatch();
-    const error = useSelector(({ auth }) => auth.login.error);
+    const error = useSelector(({ auth }) => auth.register.error);
+    const isChecking = useSelector(({ auth }) => auth.register.isChecking);
+
 
     const onSubmit = registerData => {
         dispatch(registerUser(registerData))
     };
+
+    if (isChecking) {
+        return <LoadingView />
+    }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="centered-container-form">

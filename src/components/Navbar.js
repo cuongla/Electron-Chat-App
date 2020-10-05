@@ -13,19 +13,21 @@ export default function NavBar({ canGoBack }) {
         <div className="chat-navbar">
             <nav className="chat-navbar-inner">
                 <div className="chat-navbar-inner-left">
-                    <button
-                        onClick={() => history.goBack()}
-                        className="btn btn-outline-primary">Back
-            </button>
-                    <Link
-                        to="/settings"
-                        className="btn btn-outline-success ml-2">Settings
-            </Link>
+                    {user && <>
+                        <button
+                            onClick={() => history.goBack()}
+                            className="btn btn-outline-primary">Back
+                        </button>
+                        <Link
+                            to="/settings"
+                            className="btn btn-outline-success ml-2">Settings
+                        </Link>
+                    </>}
+                </div>
+                <div className="chat-navbar-inner-center">
+                        <h1>Electron Chat</h1>
                 </div>
                 <div className="chat-navbar-inner-right">
-                    {!user && <Link
-                        to="/"
-                        className="btn btn-outline-success ml-2">Login</Link>}
                     {user &&
                         <>
                             <img className="avatar mr-2" src={user.avatar}></img>
