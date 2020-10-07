@@ -1,14 +1,21 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { createChat } from '../actions/chats';
 
 
 export default function ChatCreateForm() {
     const { register, handleSubmit } = useForm();
+    const user = useSelector(({ auth }) => auth.user);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const onSubmit = data => {
-        alert(JSON.stringify(data))
+        dispatch(createChat(data, user.id))
+            .then(_ => history.push('/home')); // redirect to home page 
     }
-    
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="centered-container-form">
             <div className="header">Create chat now!</div>
