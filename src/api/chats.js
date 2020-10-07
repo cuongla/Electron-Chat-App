@@ -11,3 +11,12 @@ export const fetchChats = () =>
 export const createChat = (chat) =>
         db.collection(`chats`).add(chat).then(docRef => docRef.id)
 
+export const joinChat = async (userId, chatId) => {
+        const userRef = db.doc(`profiles/${userId}`);
+        const chatRef = db.doc(`chats/${chatId}`);
+
+        // add chat to user joinedChat
+        // add user to chat joinedUsers
+        await userRef.update({ joinedChats: firebase.firestore.FieldValue.arrayUnion(chatRef) })
+        await chatRef.update({ joinedUsers: firebase.firestore.FieldValue.arrayUnion(userRef) })
+}
