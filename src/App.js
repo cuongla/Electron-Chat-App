@@ -3,6 +3,7 @@ import HomeView from './view/Home';
 import SettingsView from './view/Settings';
 import WelcomeView from './view/Welcome';
 import ChatView from './view/Chat';
+import ChatCreateView from './view/ChatCreate';
 import LoadingView from './components/shared/LoadingView';
 import ContentWrapper from './utils/ContentWrapper';
 import AuthRoute from './utils/AuthRoute';
@@ -19,6 +20,7 @@ import {
 //actions
 import { listenToAuthChanges } from './actions/auth';
 import { listenToConnectionChanges } from './actions/app';
+import ChatCreate from './view/ChatCreate';
 
 
 function ChatApp() {
@@ -51,6 +53,9 @@ function ChatApp() {
                     </Route>
                     <AuthRoute path="/home">
                         <HomeView />
+                    </AuthRoute>
+                    <AuthRoute path="/chat/create">
+                        <ChatCreate />
                     </AuthRoute>
                     <AuthRoute path="/chat/:id">
                         <ChatView />
