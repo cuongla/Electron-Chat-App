@@ -24,6 +24,7 @@ import { listenToConnectionChanges } from './actions/app';
 function ChatApp() {
     const dispatch = useDispatch();
     const isChecking = useSelector(({ auth }) => auth.isChecking);
+    const isOnline = useSelector(({app}) => app.isOnline);
 
     useEffect(() => {
         const unsubFromConnection = dispatch(listenToConnectionChanges());
@@ -32,6 +33,10 @@ function ChatApp() {
             unsubFromConnection();
         }
     }, [dispatch])
+
+    if (!isOnline) {
+        return <LoadingView message="Application has been disconnected from the internet. Please reconnect..."/>
+    }
 
     if (isChecking) {
         return <LoadingView />

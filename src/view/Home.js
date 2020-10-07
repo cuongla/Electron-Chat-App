@@ -7,12 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // actions
 import { fetchChats } from '../actions/chats';
+import Notification from '../utils/Notification';
 
 function Home() {
     const dispatch = useDispatch();
     const chats = useSelector(({ chats }) => chats.items)
 
     useEffect(() => {
+        Notification.setup();
         dispatch(fetchChats())
     }, [dispatch])
 

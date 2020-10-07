@@ -6,8 +6,11 @@ import chatReducer from './chat';
 import authReducer from './auth';
 import appReducer from './app';
 
+// middlewares
+import appMiddleware from './middlewares/app';
+
 export const init = () => {
-    const middlewares = [thunk];
+    const middlewares = [thunk, appMiddleware];
 
     const reducer = combineReducers({
         chats: chatReducer,
