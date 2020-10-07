@@ -18,14 +18,19 @@ import {
 } from 'react-router-dom';
 //actions
 import { listenToAuthChanges } from './actions/auth';
+import { listenToConnectionChanges } from './actions/app';
 
 
 function ChatApp() {
     const dispatch = useDispatch();
-    const isChecking = useSelector(({ auth }) => auth.isChecking)
+    const isChecking = useSelector(({ auth }) => auth.isChecking);
 
     useEffect(() => {
-        dispatch(listenToAuthChanges());
+        const unsubFromConnection = dispatch(listenToConnectionChanges());
+
+        return () => {
+            unsubFromConnection();
+        }
     }, [dispatch])
 
     if (isChecking) {

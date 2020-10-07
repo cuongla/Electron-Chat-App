@@ -14,3 +14,6 @@ export const USER_LOGOUT_SUCCESS = 'USER_LOGOUT_SUCCESS'
 export const AUTH_ON_INIT = 'AUTH_ON_INIT'
 export const AUTH_ON_SUCCESS = 'AUTH_ON_SUCCESS'
 export const AUTH_ON_ERROR = 'AUTH_ON_ERROR'
+
+export const APP_IS_ONLINE = 'APP_IS_ONLINE';
+export const APP_IS_OFFLINE = 'APP_IS_OFFLINE';
