@@ -1,16 +1,38 @@
 import {
-    CHATS_FETCH_SUCCESS
+    CHATS_FETCH_SUCCESS,
+    CHATS_FETCH_RESTART,
 } from '../actions/types';
+import { combineReducers } from 'redux';
 
-const INTIAL_STATE = {
-    items: []
-}
-
-export default function chatReducer(state = INTIAL_STATE, action) {
+function createChatReducer() {
+  const joined = (state = [], action) => {
     switch(action.type) {
-        case CHATS_FETCH_SUCCESS:
-            return { items: action.chats}
-        default:
-            return state
+      case CHATS_FETCH_SUCCESS:
+        return action.joined;
+      case CHATS_FETCH_RESTART:
+        return [];
+      default: {
+        return state;
+      }
     }
+  }
+
+  const available = (state = [], action) => {
+    switch(action.type) {
+      case CHATS_FETCH_SUCCESS:
+        return action.available;
+      case CHATS_FETCH_RESTART:
+        return [];
+      default: {
+        return state;
+      }
+    }
+  }
+
+  return combineReducers({
+    joined,
+    available
+  })
 }
+
+export default createChatReducer();

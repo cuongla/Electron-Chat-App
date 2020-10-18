@@ -1,19 +1,20 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { withBaseLayout } from '../layouts/Base';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { createChat } from '../actions/chats';
+import { useHistory } from 'react-router-dom';
 
 
-export default function ChatCreateForm() {
+function ChatCreateForm() {
     const { register, handleSubmit } = useForm();
     const user = useSelector(({ auth }) => auth.user);
     const dispatch = useDispatch();
     const history = useHistory();
 
     const onSubmit = data => {
-        dispatch(createChat(data, user.id))
-            .then(_ => history.push('/home')); // redirect to home page 
+        dispatch(createChat(data, user.uid))
+            .then(_ => history.push('/home'))
     }
 
     return (
@@ -52,8 +53,10 @@ export default function ChatCreateForm() {
                 </div>
                 <button
                     type="submit"
-                    className="btn btn-outline-primary">Create</button>
+                    className="btn btn-outline-primary">Add Chat Room</button>
             </div>
         </form>
     )
 }
+
+export default withBaseLayout(ChatCreateForm, { canGoBack: true });

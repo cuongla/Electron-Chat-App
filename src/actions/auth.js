@@ -9,7 +9,8 @@ import {
     USER_LOGOUT_SUCCESS,
     AUTH_ON_INIT,
     AUTH_ON_SUCCESS,
-    AUTH_ON_ERROR
+    AUTH_ON_ERROR,
+    CHATS_FETCH_RESTART
 } from './types';
 
 export const registerUser = formData => dispatch => {
@@ -46,6 +47,7 @@ export const logout = () => dispatch =>
         .logout()
         .then(_ => {
             dispatch({ type: USER_LOGOUT_SUCCESS });
+            dispatch({ type: CHATS_FETCH_RESTART });
         })
 
 export const listenToAuthChanges = () => dispatch => {

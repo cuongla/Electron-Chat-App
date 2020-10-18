@@ -13,7 +13,8 @@ import Notification from '../utils/Notification';
 
 function Home() {
     const dispatch = useDispatch();
-    // const chats = useSelector(({ chats }) => chats.items)
+    const joinedChats = useSelector(({ chats }) => chats.joined)
+    const availableChats = useSelector(({ chats }) => chats.available)
 
     useEffect(() => {
         Notification.setup();
@@ -23,16 +24,23 @@ function Home() {
     return (
         <div className="row no-gutters fh">
             <div className="col-3 fh">
-                <JoinedChatsList chats={[]} />
-
+                {
+                    joinedChats.length === 0 ? 
+                        <div>No chats on the list </div> : 
+                        <JoinedChatsList chats={joinedChats} />
+                }
             </div>
             <div className="col-9 fh">
                 <ViewTitle text="Choose your channel">
                     <Link
                         className="btn btn-outline-primary"
-                        to="/chat/create">New</Link>
+                        to="/chat/create">Create A Chat Room</Link>
                 </ViewTitle>
-                <AvailableChatsList chats={[]} />
+                {
+                    availableChats.length === 0 ? 
+                        <div>No available chats to join </div> : 
+                        <AvailableChatsList chats={availableChats} />
+                }         
             </div>
         </div>
     )
