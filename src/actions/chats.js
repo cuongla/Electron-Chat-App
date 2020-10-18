@@ -8,9 +8,11 @@ import {
   CHATS_SET_ACTIVE_CHAT,
   CHATS_UPDATE_USER_STATE,
   CHATS_MESSAGE_SENT,
-  CHATS_SET_MESSAGES
+  CHATS_SET_MESSAGES,
+  CHATS_REGISTER_MESSAGE_SUB
 } from './types';
 
+// fetch all chats 
 export const fetchChats = () => async (dispatch, getState) => {
   const { user } = getState().auth;
   dispatch({ type: CHATS_FETCH_INIT });
@@ -95,20 +97,41 @@ export const sendChatMessage = (message, chatId) => (dispatch, getState) => {
 
 // subscribing to message
 export const subscribeToMessages = chatId => dispatch => {
-  return api.subscribeToMessages(chatId, messages => {
-    const chatMessages = messages.map(message => {
-      if(message.type === 'added') {
+  return api.subscribeToMessages(chatId, async changes => {
+    const messages = changes.map(change => {
+      if(change.type === 'added') {
         return {
-          id: message.doc.id,
-          ...message.doc.data()
+          id: change.doc.id,
+          ...change.doc.data()
         }
       }
     })
 
-    dispatch({
-      type: CHATS_SET_MESSAGES,
-      chatMessages,
+    const messagesWithAuthor = [];
+    const cache = {}
+
+    for await(let message of messages) {
+      if (cache[message.author.id]) {
+        message.author = cache[message.author.id]
+      } else {
+        const userSnapshot = await message.author.get();
+        cache[userSnapshot.id] = userSnapshot.data();
+        message.author = cache[userSnapshot.id]
+      }
+
+      messagesWithAuthor.push(message);
+    }
+
+    return dispatch({
+      type: CHATS_SET_MESSAGES, 
+      messages: messagesWithAuthor, 
       chatId
     })
   })
 }
+
+export const registerMessageSubscription = (chatId, messageSub) => ({
+  type: CHATS_REGISTER_MESSAGE_SUB,
+  sub: messageSub,
+  chatId
+});

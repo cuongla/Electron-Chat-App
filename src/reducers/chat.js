@@ -2,6 +2,7 @@ import {
   CHATS_FETCH_SUCCESS,
   CHATS_FETCH_RESTART,
   CHATS_JOIN_SUCCESS,
+  CHATS_REGISTER_MESSAGE_SUB
 } from '../actions/types';
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
@@ -52,10 +53,28 @@ function createChatReducer() {
     }
   }
 
+  const messages = createReducer({}, {
+    'CHATS_SET_MESSAGES': (state, action) => {
+      const prevMessages = state[action.chatId] || [];
+      state[action.chatId] = [...prevMessages, ...action.messages]
+    }
+  })
+
+  const messageSubs = (state = {}, action) => {
+    switch(action.type) {
+      case CHATS_REGISTER_MESSAGE_SUB:
+        return {...state, [action.chatId]: action.sub}
+      default:
+        return state;
+    }
+  }
+
   return combineReducers({
     joined,
     available,
-    activeChats
+    activeChats,
+    messages,
+    messagesSubs
   })
 }
 
