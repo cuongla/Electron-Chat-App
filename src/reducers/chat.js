@@ -1,9 +1,10 @@
 import {
     CHATS_FETCH_SUCCESS,
     CHATS_FETCH_RESTART,
-    CHATS_JOIN_SUCCESS
+    CHATS_JOIN_SUCCESS,
 } from '../actions/types';
 import { combineReducers } from 'redux';
+import {createReducer} from '@reduxjs/toolkit';
 
 function createChatReducer() {
   const joined = (state = [], action) => {
@@ -19,6 +20,13 @@ function createChatReducer() {
       }
     }
   }
+
+  const activeChats = createReducer({}, {
+    "CHATS_SET_ACTIVE_CHAT": (state, action) => {
+      const { chat } = action;
+      state[chat.id] = chat;
+    }
+  })
 
   const available = (state = [], action) => {
     switch(action.type) {
@@ -36,7 +44,8 @@ function createChatReducer() {
 
   return combineReducers({
     joined,
-    available
+    available,
+    activeChats
   })
 }
 
