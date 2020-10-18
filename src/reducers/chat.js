@@ -1,6 +1,6 @@
 import {
     CHATS_FETCH_SUCCESS,
-    CHATS_FETCH_RESTART,
+    CHATS_FETCH_RESTART,, CHATS_JOIN_SUCCESS
 } from '../actions/types';
 import { combineReducers } from 'redux';
 
@@ -9,6 +9,8 @@ function createChatReducer() {
     switch(action.type) {
       case CHATS_FETCH_SUCCESS:
         return action.joined;
+      case CHATS_JOIN_SUCCESS:
+        return [...state, action.chat];
       case CHATS_FETCH_RESTART:
         return [];
       default: {
@@ -22,7 +24,9 @@ function createChatReducer() {
       case CHATS_FETCH_SUCCESS:
         return action.available;
       case CHATS_FETCH_RESTART:
-        return [];
+        return;
+      case CHATS_JOIN_SUCCESS:
+        return state.filter(chat => chat.id !== action.chat.id);
       default: {
         return state;
       }

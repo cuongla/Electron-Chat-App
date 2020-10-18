@@ -9,7 +9,7 @@ import {
 
 export const fetchChats = () => async (dispatch, getState) => {
     const { user } = getState().auth;
-    dispatch({type: 'CHATS_FETCH_INIT'});
+    dispatch({type: CHATS_FETCH_INIT});
     const chats = await api.fetchChats();
   
     // get all chats with user id
@@ -22,7 +22,7 @@ export const fetchChats = () => async (dispatch, getState) => {
     }, {joined: [], available: []})
   
     dispatch({
-      type: 'CHATS_FETCH_SUCCESS',
+      type: CHATS_FETCH_SUCCESS,
       ...sortedChats
     })
   
@@ -42,6 +42,9 @@ export const createChat = (formData, userId) => async dispatch => {
     const chatId = await api.createChat(newChat);
     dispatch({type: CHATS_CREATE_SUCCESS});
     await api.joinChat(userId, chatId)
-    dispatch({type: CHATS_JOIN_SUCCESS});
+    dispatch({
+      type: CHATS_JOIN_SUCCESS,
+      chat: {...newChat, id: chatId}
+    });
     return chatId;
 }
