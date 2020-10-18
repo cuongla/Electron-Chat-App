@@ -1,14 +1,14 @@
 import {
-    CHATS_FETCH_SUCCESS,
-    CHATS_FETCH_RESTART,
-    CHATS_JOIN_SUCCESS,
+  CHATS_FETCH_SUCCESS,
+  CHATS_FETCH_RESTART,
+  CHATS_JOIN_SUCCESS,
 } from '../actions/types';
 import { combineReducers } from 'redux';
-import {createReducer} from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 
 function createChatReducer() {
   const joined = (state = [], action) => {
-    switch(action.type) {
+    switch (action.type) {
       case CHATS_FETCH_SUCCESS:
         return action.joined;
       case CHATS_JOIN_SUCCESS:
@@ -25,11 +25,21 @@ function createChatReducer() {
     "CHATS_SET_ACTIVE_CHAT": (state, action) => {
       const { chat } = action;
       state[chat.id] = chat;
+    },
+    'CHATS_UPDATE_USER_STATE': (state, action) => {
+      const { user, chatId } = action;
+      const joinedUsers = state[chatId].joinedUsers;
+      const index = joinedUsers.findIndex(ju => ju.uid === user.uid);
+
+      if (index < 0) { return state; }
+      if (joinedUsers[index].state === user.state) { return state; }
+
+      joinedUsers[index].state = user.state;
     }
   })
 
   const available = (state = [], action) => {
-    switch(action.type) {
+    switch (action.type) {
       case CHATS_FETCH_SUCCESS:
         return action.available;
       case CHATS_FETCH_RESTART:
