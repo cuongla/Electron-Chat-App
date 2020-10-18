@@ -1,6 +1,7 @@
 import {
     CHATS_FETCH_SUCCESS,
-    CHATS_FETCH_RESTART,, CHATS_JOIN_SUCCESS
+    CHATS_FETCH_RESTART,
+    CHATS_JOIN_SUCCESS
 } from '../actions/types';
 import { combineReducers } from 'redux';
 

@@ -4,7 +4,8 @@ import {
     CHATS_FETCH_SUCCESS,
     CHATS_FETCH_INIT,
     CHATS_CREATE_SUCCESS,
-    CHATS_JOIN_SUCCESS
+    CHATS_JOIN_SUCCESS,
+    CHATS_SET_ACTIVE_CHAT
 } from './types';
 
 export const fetchChats = () => async (dispatch, getState) => {
@@ -47,4 +48,10 @@ export const createChat = (formData, userId) => async dispatch => {
       chat: {...newChat, id: chatId}
     });
     return chatId;
+}
+
+export const subscribeToChat = chatId => dispatch => {
+  return api.subscribeToChat(chatId, (chat) => {
+    dispatch({ type: CHATS_SET_ACTIVE_CHAT})
+  })
 }
