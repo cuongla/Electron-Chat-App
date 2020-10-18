@@ -8,6 +8,7 @@ import appReducer from './app';
 
 // middlewares
 import appMiddleware from './middlewares/app';
+import {USER_LOGOUT_SUCCESS} from  '../actions/types';
 
 export const init = () => {
     const middlewares = [thunk, appMiddleware];
@@ -18,8 +19,14 @@ export const init = () => {
         app: appReducer
     });
 
+    const rootReducer = (state, action) => {
+        if(action.type === USER_LOGOUT_SUCCESS) state = undefined;
+
+        return reducer(state, action);
+    }
+
     const store = createStore(
-        reducer,
+        rootReducer,
         applyMiddleware(...middlewares)
     );
 

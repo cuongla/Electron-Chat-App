@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { formatTimeAgo } from '../../utils/Time';
 
 
-export default function ChatMessagesList({ messages = [] }) {
+export default function ChatMessagesList({ messages = [], innerRef }) {
     const user = useSelector(({ auth }) => auth.user);
 
     const isAuthorOf = useCallback(message => {
@@ -12,7 +12,8 @@ export default function ChatMessagesList({ messages = [] }) {
 
     return (
         <div className="chat-container">
-            <ul className="chat-box chatContainerScroll">
+            <ul ref={innerRef} className="chat-box chatContainerScroll">
+
                 {messages.map(message =>
                     <li
                         key={message.id}
