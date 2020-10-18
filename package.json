@@ -33,7 +33,7 @@
     "bootstrap": "^4.5.2",
     "css-loader": "^4.3.0",
     "firebase": "^7.21.1",
-    "moment": "^2.29.0",
+    "moment": "^2.29.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.8.6",
