@@ -11,6 +11,9 @@ import ChatUserList from '../components/user/ChatUsersList';
 import ViewTitle from '../components/shared/ViewTitle';
 import ChatMessagesList from '../components/chat/ChatMessagesList';
 
+// messenger view
+import Messenger from '../components/messenger/Messenger';
+
 // actions
 import { subscribeToChat, subscribeToProfile } from '../actions/chats';
 
@@ -34,6 +37,10 @@ function Chat() {
     useEffect(() => {
         joinedUsers && subscribeToJoinedUsers(joinedUsers);
     }, [joinedUsers])
+
+    const sendMessage = message => {
+        alert(JSON.stringify(message));
+    }
 
     const subscribeToJoinedUsers = useCallback(jUsers => {
         jUsers.forEach(user => {
@@ -60,6 +67,7 @@ function Chat() {
             <div className="col-9 fh">
                 <ViewTitle text={`Channel ${activeChat?.name}`} />
                 <ChatMessagesList />
+                <Messenger onSubmit={sendMessage} />
             </div>
         </div>
     )
