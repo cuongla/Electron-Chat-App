@@ -20,24 +20,28 @@ import {
 //actions
 import { listenToAuthChanges } from './actions/auth';
 import { listenToConnectionChanges } from './actions/app';
-import ChatCreate from './view/ChatCreate';
+import { checkUserConnection } from './actions/connection';
 
 
 function ChatApp() {
     const dispatch = useDispatch();
     const isChecking = useSelector(({ auth }) => auth.isChecking);
-    const isOnline = useSelector(({app}) => app.isOnline);
+    const isOnline = useSelector(({ app }) => app.isOnline);
 
     useEffect(() => {
+        const unsubFromAuth = dispatch(listenToAuthChanges());
         const unsubFromConnection = dispatch(listenToConnectionChanges());
+        const unsubFromUserConnection = dispatch(checkUserConnection());
 
         return () => {
+            unsubFromAuth();
             unsubFromConnection();
+            unsubFromUserConnection();
         }
     }, [dispatch])
 
     if (!isOnline) {
-        return <LoadingView message="Application has been disconnected from the internet. Please reconnect..."/>
+        return <LoadingView message="Application has been disconnected from the internet. Please reconnect..." />
     }
 
     if (isChecking) {
@@ -55,7 +59,7 @@ function ChatApp() {
                         <HomeView />
                     </AuthRoute>
                     <AuthRoute path="/chat/create">
-                        <ChatCreate />
+                        <ChatCreateView />
                     </AuthRoute>
                     <AuthRoute path="/chat/:id">
                         <ChatView />
