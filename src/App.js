@@ -21,6 +21,7 @@ import {
 import { listenToAuthChanges } from './actions/auth';
 import { listenToConnectionChanges } from './actions/app';
 import { checkUserConnection } from './actions/connection';
+import {loadInitialSettings} from './actions/settings';
 
 
 function ChatApp() {
@@ -29,6 +30,7 @@ function ChatApp() {
     const isOnline = useSelector(({ app }) => app.isOnline);
 
     useEffect(() => {
+        dispatch(loadInitialSettings());
         const unsubFromAuth = dispatch(listenToAuthChanges());
         const unsubFromConnection = dispatch(listenToConnectionChanges());
         const unsubFromUserConnection = dispatch(checkUserConnection());

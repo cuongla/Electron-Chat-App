@@ -9,7 +9,7 @@ import settingsReducer from './settings';
 
 // middlewares
 import appMiddleware from './middlewares/app';
-import {USER_LOGOUT_SUCCESS} from  '../actions/types';
+import { USER_LOGOUT_SUCCESS } from '../actions/types';
 
 export const init = () => {
     const middlewares = [thunk, appMiddleware];
@@ -22,7 +22,15 @@ export const init = () => {
     });
 
     const rootReducer = (state, action) => {
-        if(action.type === USER_LOGOUT_SUCCESS) state = undefined;
+        if (action.type === USER_LOGOUT_SUCCESS) {
+            Object.keys(state).forEach(sk => {
+                if (state[sk].savable) {
+                    return;
+                }
+
+                state[sk] = undefined;
+            })
+        }
 
         return reducer(state, action);
     }

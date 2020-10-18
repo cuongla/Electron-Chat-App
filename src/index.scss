@@ -51,6 +51,15 @@ body {
         background-color: $gray-900;
         color: white;
 
+        .items .item.active-item,
+        .item:hover {
+            background-color: $gray-700;
+        }
+
+        .card-body {
+            color: black;
+        }
+
         .chat-container li .chat-text-wrapper {
             background: #4d4d4d;
         }
@@ -500,7 +509,7 @@ ul {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: $gray-700;
     z-index: 990;
 
     .loading-view {
@@ -530,5 +539,19 @@ ul {
                 max-width: 480px;
             }
         }
+    }
+}
+
+.dark {
+    .loading-screen {
+        color: white;
+    }
+
+    .loading-view-container {
+        background-color: $gray-900;
+    }
+
+    .sk-chase-dot:before {
+        background-color: white;
     }
 }
