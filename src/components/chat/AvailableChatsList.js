@@ -1,6 +1,19 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { joinChat } from '../../actions/chats';
 
 export default function AvailableChatsList({ chats }) {
+    const user = useSelector(({ auth }) => auth.user);
+    const dispatch = useDispatch();
+
+    // ask user to confirmation to join chat
+    const askForConfirmation = chat => {
+        const isConfirming = confirm(`Do you want to join the chat: ${chat.name} ?`);
+
+        if (isConfirming) {
+            dispatch(joinChat(chat, user.uid));
+        }
+    }
     return (
         <div className="container-fluid">
             <div className="row mt-3">

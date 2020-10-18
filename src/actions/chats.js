@@ -4,7 +4,7 @@ import {
     CHATS_FETCH_SUCCESS,
     CHATS_FETCH_INIT,
     CHATS_CREATE_SUCCESS,
-    CHATS_JOINED_SUCCESS
+    CHATS_JOIN_SUCCESS
 } from './types';
 
 export const fetchChats = () => async (dispatch, getState) => {
@@ -29,6 +29,12 @@ export const fetchChats = () => async (dispatch, getState) => {
     return sortedChats;
 }
 
+export const joinChat = (chat, uid) => dispatch => {
+  api
+    .joinChat(uid, chat.id)
+    .then(_ => dispatch({ type: CHATS_JOIN_SUCCESS }));
+}
+
 export const createChat = (formData, userId) => async dispatch => {
     const newChat = {...formData};
     newChat.admin = db.doc(`profiles/${userId}`);
@@ -36,6 +42,6 @@ export const createChat = (formData, userId) => async dispatch => {
     const chatId = await api.createChat(newChat);
     dispatch({type: CHATS_CREATE_SUCCESS});
     await api.joinChat(userId, chatId)
-    dispatch({type: CHATS_JOINED_SUCCESS});
+    dispatch({type: CHATS_JOIN_SUCCESS});
     return chatId;
 }
