@@ -10,12 +10,41 @@ exports.createTemplate = app => {
             }]
         }, {
             label: 'Edit',
-            submenu: [{
-                label: 'Undo',
-                accelerator: 'CmdOrCtrl+Z',
-                // role defined already some predifined behaviour
-                role: 'undo'
-            }]
+            submenu: [
+                {
+                    label: "Undo",
+                    accelerator: "CmdOrCtrl+Z",
+                    selector: "undo:"
+                },
+                {
+                    label: "Redo",
+                    accelerator: "Shift+CmdOrCtrl+Z",
+                    selector: "redo:"
+                },
+                {
+                    type: "separator"
+                },
+                {
+                    label: "Cut",
+                    accelerator: "CmdOrCtrl+X",
+                    selector: "cut:"
+                },
+                {
+                    label: "Copy",
+                    accelerator: "CmdOrCtrl+C",
+                    selector: "copy:"
+                },
+                {
+                    label: "Paste",
+                    accelerator: "CmdOrCtrl+V",
+                    selector: "paste:"
+                },
+                {
+                    label: "Select All",
+                    accelerator: "CmdOrCtrl+A",
+                    selector: "selectAll:"
+                }
+            ]
         }, {
             label: 'View',
             submenu: [{
@@ -26,11 +55,9 @@ exports.createTemplate = app => {
                         // on reload, start fresh and close any old
                         // open secondary windows
                         if (focusedWindow.id === 1) {
-                            // console.log('in FOCUS!');
                             const { BrowserWindow } = require('electron');
                             BrowserWindow.getAllWindows().forEach(win => {
                                 if (win.id > 1) {
-                                    // console.log('Closing!');
                                     win.close();
                                 }
                             })
