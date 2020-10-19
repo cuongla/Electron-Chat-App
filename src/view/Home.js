@@ -24,11 +24,7 @@ function Home() {
     return (
         <div className="row no-gutters fh">
             <div className="col-3 fh">
-                {
-                    joinedChats.length === 0 ? 
-                        <div>No chats on the list </div> : 
-                        <JoinedChatsList chats={joinedChats} />
-                }
+                <JoinedChatsList chats={joinedChats} />
             </div>
             <div className="col-9 fh">
                 <ViewTitle text="Choose your channel">
@@ -36,11 +32,7 @@ function Home() {
                         className="btn btn-outline-primary"
                         to="/chat/create">Create A Chat Room</Link>
                 </ViewTitle>
-                {
-                    availableChats.length === 0 ? 
-                        <div>No available chats to join </div> : 
-                        <AvailableChatsList chats={availableChats} />
-                }         
+                <AvailableChatsList chats={availableChats} />
             </div>
         </div>
     )

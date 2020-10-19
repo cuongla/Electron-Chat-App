@@ -10,7 +10,6 @@ function Settings() {
         showNotifications,
         playSound } = useSelector(({ settings }) => settings)
 
-
     const handleChange = ({ target: { checked, name } }) => {
         dispatch(updateSettings(name, checked))
     }
@@ -25,9 +24,7 @@ function Settings() {
                             <div className="form-check">
                                 <input
                                     checked={isDarkTheme}
-
                                     onChange={handleChange}
-
                                     name="isDarkTheme"
                                     type="checkbox"
                                     className="form-check-input" />
@@ -35,8 +32,8 @@ function Settings() {
                             </div>
                             <div className="form-check">
                                 <input
-                                    onChange={handleChange}
                                     checked={showNotifications}
+                                    onChange={handleChange}
                                     name="showNotifications"
                                     type="checkbox"
                                     className="form-check-input" />
@@ -44,8 +41,8 @@ function Settings() {
                             </div>
                             <div className="form-check">
                                 <input
-                                    onChange={handleChange}
                                     checked={playSound}
+                                    onChange={handleChange}
                                     name="playSound"
                                     type="checkbox"
                                     className="form-check-input" />
@@ -57,7 +54,7 @@ function Settings() {
                             onClick={() => electron.appApi.quitApp()}
                             className="btn btn-danger">
                             Quit App
-            </button>
+              </button>
                     </div>
                 </form>
             </div>

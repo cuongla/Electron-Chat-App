@@ -13,7 +13,6 @@ export default function ChatMessagesList({ messages = [], innerRef }) {
     return (
         <div className="chat-container">
             <ul ref={innerRef} className="chat-box chatContainerScroll">
-
                 {messages.map(message =>
                     <li
                         key={message.id}

@@ -24,19 +24,20 @@ import {
 } from '../actions/chats';
 
 
+
 function Chat() {
     const { id } = useParams();
     const peopleWatchers = useRef({});
     const messageList = useRef();
     const dispatch = useDispatch();
-    const activeChat = useSelector(({ chats }) => chats.activeChats[id]);
-    const messages = useSelector(({ chats }) => chats.messages[id]);
+    const activeChat = useSelector(({ chats }) => chats.activeChats[id])
+    const messages = useSelector(({ chats }) => chats.messages[id])
     const messagesSub = useSelector(({ chats }) => chats.messagesSubs[id])
     const joinedUsers = activeChat?.joinedUsers;
 
-
     useEffect(() => {
         const unsubFromChat = dispatch(subscribeToChat(id));
+
         if (!messagesSub) {
             const unsubFromMessages = dispatch(subscribeToMessages(id));
             dispatch(registerMessageSubscription(id, unsubFromMessages));
@@ -52,11 +53,6 @@ function Chat() {
         joinedUsers && subscribeToJoinedUsers(joinedUsers);
     }, [joinedUsers])
 
-    const sendMessage = useCallback(message => {
-        dispatch(sendChatMessage(message, id))
-            .then(_ => messageList.current.scrollIntoView(false))
-    }, [id])
-
     const subscribeToJoinedUsers = useCallback(jUsers => {
         jUsers.forEach(user => {
             if (!peopleWatchers.current[user.uid]) {
@@ -64,6 +60,11 @@ function Chat() {
             }
         })
     }, [dispatch, id])
+
+    const sendMessage = useCallback(message => {
+        dispatch(sendChatMessage(message, id))
+            .then(_ => messageList.current.scrollIntoView(false))
+    }, [id])
 
     const unsubFromJoinedUsers = useCallback(() => {
         Object.keys(peopleWatchers.current)

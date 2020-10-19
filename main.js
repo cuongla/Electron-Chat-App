@@ -30,7 +30,13 @@ if (isDev) {
 }
 
 // create browser windows when Electron has finished initialization
-app.whenReady().then(createWindow)
+app.whenReady()
+    .then(() => {
+        const template = require('./src/utils/Menu').createTemplate(app);
+        const menu = Menu.buildFromTemplate(template);
+        Menu.setApplicationMenu(menu);
+        createWindow();
+    });
 
 ipcMain.on('notify', (_, message) => {
     new Notification({ title: 'Notification', body: message })
@@ -48,7 +54,7 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
+        createWindow();
     }
 })
 

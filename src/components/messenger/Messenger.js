@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createTimeStamp } from '../../utils/Time';
+import { createTimestamp } from '../../utils/Time';
 
 export default function Messenger({ onSubmit }) {
     const [value, setValue] = useState('');
@@ -12,19 +12,20 @@ export default function Messenger({ onSubmit }) {
         }
     }
 
+    // sending message
     const sendMessage = () => {
-        if(value.trim() === '') return;
+        if (value.trim() === '') { return; }
 
         const message = {
             content: value.trim(),
-            timestamp: createTimeStamp()
+            timestamp: createTimestamp()
         }
 
         onSubmit(message);
     }
 
     return (
-        <div class="chat-input form-group mt-3 mb-0">
+        <div className="chat-input form-group mt-3 mb-0">
             <textarea
                 onChange={e => setValue(e.target.value)}
                 onKeyPress={onKeyPress}

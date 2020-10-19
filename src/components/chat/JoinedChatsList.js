@@ -9,7 +9,7 @@ export default function JoinedChatsList({ chats }) {
             <ChatSearch />
             <ul className="items">
                 {
-                    chats.map(chat => (
+                    chats.map(chat =>
                         <li
                             key={chat.id}
                             onClick={() => history.push(`/chat/${chat.id}`)}
@@ -22,7 +22,7 @@ export default function JoinedChatsList({ chats }) {
                                 <span className="name mr-2">{chat.name}</span>
                             </p>
                         </li>
-                    ))
+                    )
                 }
             </ul>
         </div>
