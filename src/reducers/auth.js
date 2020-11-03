@@ -29,7 +29,7 @@ function createAuthReducer() {
             case USER_REGISTER_SUCCESS:
             case USER_LOGIN_SUCCESS:
             case AUTH_ON_SUCCESS:
-                return action.user ? action.user : '';
+                return action.user;
             default:
                 return state;
         }

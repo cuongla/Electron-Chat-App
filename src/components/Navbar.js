@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BackButton from './shared/BackButton';
 import { logout } from '../actions/auth';
+import ProfilePhoto from '../../assets/images/DefaultProfilePhoto.png';
 
 export default function NavBar({ canGoBack, view }) {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export default function NavBar({ canGoBack, view }) {
                 <div className="chat-navbar-inner-right">
                     {user &&
                         <>
-                            <img className="avatar mr-2" src={user.avatar}></img>
+                            <img className="avatar mr-2" src={user.avatar} />
                             <span className="logged-in-user">Hi, {user.username}</span>
                             <button
                                 onClick={() => dispatch(logout())}
