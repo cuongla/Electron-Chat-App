@@ -7,6 +7,11 @@ import ChatCreateView from './view/ChatCreate';
 import LoadingView from './components/shared/LoadingView';
 import ContentWrapper from './utils/ContentWrapper';
 import AuthRoute from './utils/AuthRoute';
+import firebase from 'firebase/app';
+
+const storage = firebase.storage();
+
+const getDefaultPhoto = storage.refFromURL('gs://electron-app-614f0.appspot.com/');
 
 // redux
 import { Provider, useDispatch, useSelector } from 'react-redux';

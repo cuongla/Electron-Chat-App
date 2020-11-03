@@ -1,18 +1,23 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { registerUser } from '../actions/auth';
 import LoadingView from '../components/shared/LoadingView';
+import ProfilePhotoUpload from '../components/ProfilePhotoUpload';
 
 export default function Register() {
     const { register, handleSubmit } = useForm();
     const dispatch = useDispatch();
     const error = useSelector(({ auth }) => auth.register.error);
     const isChecking = useSelector(({ auth }) => auth.register.isChecking);
+    const history = useHistory();
 
 
     const onSubmit = registerData => {
-        dispatch(registerUser(registerData))
+        dispatch(registerUser(registerData));
+        // redirect to login
+        history.push('/');
     };
 
     if (isChecking) {
@@ -44,7 +49,11 @@ export default function Register() {
                         id="username"
                         aria-describedby="emailHelp" />
                 </div>
-                <div className="form-group">
+                <ProfilePhotoUpload 
+                    register={register}
+                    name="avatar"
+                />
+                {/* <div className="form-group">
                     <label htmlFor="avatar">Avatar</label>
                     <input
                         ref={register}
@@ -53,7 +62,7 @@ export default function Register() {
                         className="form-control"
                         id="avatar"
                         aria-describedby="emailHelp" />
-                </div>
+                </div> */}
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input
@@ -63,8 +72,9 @@ export default function Register() {
                         className="form-control"
                         id="password" />
                 </div>
-                {error && <div className="alert alert-danger small">{error.message}</div>}
-                <button type="submit" className="btn btn-outline-primary">Register</button>
+                {error && <div 
+                    className="alert alert-danger small">{error.message}</div>}
+                <button type="submit" className="btn btn-secondary">Register</button>
             </div>
         </form>
     )

@@ -28,11 +28,18 @@ export default function AvailableChatsList({ chats }) {
                         className="col-lg-3 col-md-6 mb-3">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">{chat.name}</h5>
+                                <h5 className="card-title">
+                                    {chat.name}
+                                    <i className="fa fa-group"
+                                        style={{ marginLeft: '7px' }}
+                                    ></i>
+                                </h5>
                                 <p className="card-text">{chat.description}</p>
                                 <button
                                     onClick={() => askForConfirmation(chat)}
-                                    className="btn btn-outline-primary">Join Chat</button>
+                                    className="btn btn-dark">
+                                    Join Room
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -27,10 +27,15 @@ function Home() {
                 <JoinedChatsList chats={joinedChats} />
             </div>
             <div className="col-9 fh">
-                <ViewTitle text="Choose your channel">
+                <ViewTitle text="Select A Chat Room">
                     <Link
-                        className="btn btn-outline-primary"
-                        to="/chat/create">Create A Chat Room</Link>
+                        className="btn btn-secondary"
+                        to="/chat/create">
+                        <i
+                            className="fa fa-plus"
+                            style={{ marginRight: '5px' }}></i>
+                            Add Room
+                        </Link>
                 </ViewTitle>
                 <AvailableChatsList chats={availableChats} />
             </div>

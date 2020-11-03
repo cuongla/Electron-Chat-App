@@ -19,6 +19,7 @@ export const register = async ({ email, password, username, avatar }) => {
     try {
         const { user } = await firebase.auth().
             createUserWithEmailAndPassword(email, password);
+
         const userProfile = {
             uid: user.uid,
             username,
@@ -31,6 +32,7 @@ export const register = async ({ email, password, username, avatar }) => {
         await createUserProfile(userProfile);
         return user;
     } catch (error) {
+        console.log(error.message);
         return Promise.reject(error.message);
     }
 }

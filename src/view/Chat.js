@@ -30,8 +30,8 @@ function Chat() {
     const peopleWatchers = useRef({});
     const messageList = useRef();
     const dispatch = useDispatch();
-    const activeChat = useSelector(({ chats }) => chats.activeChats[id])
-    const messages = useSelector(({ chats }) => chats.messages[id])
+    const activeChat = useSelector(({ chats }) => chats.activeChats[id]);
+    const messages = useSelector(({ chats }) => chats.messages[id]);
     const messagesSub = useSelector(({ chats }) => chats.messagesSubs[id])
     const joinedUsers = activeChat?.joinedUsers;
 

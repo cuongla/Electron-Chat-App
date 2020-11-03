@@ -14,9 +14,11 @@ export default function NavBar({ canGoBack, view }) {
                 <div className="chat-navbar-inner-left">
                     {canGoBack && <BackButton />}
                     {view !== 'Settings' &&
-                        <Link
+                        <Link 
                             to="/settings"
-                            className="btn btn-outline-success ml-2">Settings
+                            className="icon"
+                        >
+                            <i className="fa fa-cog fa-sm"></i>
                         </Link>
                     }
                 </div>
@@ -27,8 +29,8 @@ export default function NavBar({ canGoBack, view }) {
                             <span className="logged-in-user">Hi, {user.username}</span>
                             <button
                                 onClick={() => dispatch(logout())}
-                                className="btn btn-outline-danger ml-4">Logout
-                </button>
+                                className="btn btn-danger ml-4">Log Out
+                            </button>
                         </>
                     }
                 </div>

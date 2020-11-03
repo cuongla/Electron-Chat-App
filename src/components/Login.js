@@ -46,7 +46,7 @@ export default function Login() {
                         id="password" />
                 </div>
                 {error && <div className="alert alert-danger small">{error.message}</div>}
-                <button type="submit" className="btn btn-outline-primary">Login</button>
+                <button type="submit" className="btn btn-secondary">Log In</button>
             </div>
         </form>
     )

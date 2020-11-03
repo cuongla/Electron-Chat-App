@@ -1,15 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
 
 export default function BackButton() {
     const history = useHistory();
 
     return(
-        <button
+        <Link
             onClick={() => history.goBack()}
-            className="btn btn-outline-primary"
+            className="icon"
+            style={{ marginRight: '10px'}}
         >
-            Back
-        </button>
+            <i className="fa fa-arrow-circle-o-left"></i>
+        </Link>
     )
 }
