@@ -1,4 +1,3 @@
-
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
@@ -37,14 +36,18 @@ module.exports = {
                     'sass-loader',
                 ],
             },
-            // {
-            //     test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
-            //     use: [
-            //         {
-            //             loader: 'file-loader',
-            //         },
-            //     ],
-            // }
+            {
+                test: /\.(gif|png|jpe?g)$/,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: {
+                      name: '[name].[ext]',
+                      outputPath: 'assets/images/'
+                    }
+                  }
+                ]
+              },
         ]
     },
     plugins: [new Dotenv({

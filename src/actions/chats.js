@@ -18,9 +18,10 @@ export const fetchChats = () => async (dispatch, getState) => {
   dispatch({ type: CHATS_FETCH_INIT });
   const chats = await api.fetchChats();
 
+  // get all chats with user id
   chats
     .forEach(chat => chat.joinedUsers = chat.joinedUsers.map(user => user.id));
-  // console.log(chats);
+
   const sortedChats = chats.reduce((accuChats, chat) => {
     accuChats[chat.joinedUsers.includes(user.uid) ? 'joined' : 'available'].push(chat);
     return accuChats;
@@ -78,15 +79,15 @@ export const subscribeToProfile = (uid, chatId) => dispatch =>
   api
     .subscribeToProfile(uid, user => {
       dispatch({
-        type: CHATS_UPDATE_USER_STATE,
-        user,
+        type: CHATS_UPDATE_USER_STATE, 
+        user, 
         chatId
       })
     });
 
 // send chat message
 export const sendChatMessage = (message, chatId) => (dispatch, getState) => {
-  const newMessage = { ...message };
+  const newMessage = {...message};
   const { user } = getState().auth;
   const userRef = db.doc(`profiles/${user.uid}`);
   newMessage.author = userRef;
@@ -98,7 +99,7 @@ export const sendChatMessage = (message, chatId) => (dispatch, getState) => {
 export const subscribeToMessages = chatId => dispatch => {
   return api.subscribeToMessages(chatId, async changes => {
     const messages = changes.map(change => {
-      if (change.type === 'added') {
+      if(change.type === 'added') {
         return {
           id: change.doc.id,
           ...change.doc.data()
@@ -109,7 +110,7 @@ export const subscribeToMessages = chatId => dispatch => {
     const messagesWithAuthor = [];
     const cache = {}
 
-    for await (let message of messages) {
+    for await(let message of messages) {
       if (cache[message.author.id]) {
         message.author = cache[message.author.id]
       } else {
@@ -122,8 +123,8 @@ export const subscribeToMessages = chatId => dispatch => {
     }
 
     return dispatch({
-      type: CHATS_SET_MESSAGES,
-      messages: messagesWithAuthor,
+      type: CHATS_SET_MESSAGES, 
+      messages: messagesWithAuthor, 
       chatId
     })
   })

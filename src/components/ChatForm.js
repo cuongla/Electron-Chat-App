@@ -41,7 +41,7 @@ function ChatCreateForm() {
                         id="description">
                     </textarea>
                 </div>
-                {/* <div className="form-group">
+                <div className="form-group">
                     <label htmlFor="image">Image</label>
                     <input
                         ref={register}
@@ -50,7 +50,7 @@ function ChatCreateForm() {
                         id="image"
                         name="image"
                     />
-                </div> */}
+                </div>
                 <button
                     type="submit"
                     className="btn btn-outline-primary">Add Chat Room</button>

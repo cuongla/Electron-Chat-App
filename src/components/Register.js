@@ -49,7 +49,7 @@ export default function Register() {
                         id="username"
                         aria-describedby="emailHelp" />
                 </div>
-                <ProfilePhotoUpload 
+                <ProfilePhotoUpload
                     register={register}
                     name="avatar"
                 />
@@ -72,7 +72,7 @@ export default function Register() {
                         className="form-control"
                         id="password" />
                 </div>
-                {error && <div 
+                {error && <div
                     className="alert alert-danger small">{error.message}</div>}
                 <button type="submit" className="btn btn-secondary">Register</button>
             </div>

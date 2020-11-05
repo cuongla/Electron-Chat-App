@@ -6,15 +6,15 @@ import Register from '../components/Register';
 
 export default function Welcome() {
     const [isLoginView, setIsLogin] = useState(true);
-    // const user = useSelector(({ auth }) => auth.user);
+    const user = useSelector(({ auth }) => auth.user);
 
     const optInText = isLoginView ?
-        ['Need an account?', 'Register an account'] :
-        ['Already registered?', 'Log in with your account']
+        ['Need an account?', 'Register Account'] :
+        ['Already registered?', 'Login Account']
 
-    // if (user) {
-    //     return <Redirect to="/home" />
-    // }
+    if (user) {
+        return <Redirect to="/home" />
+    }
 
     return (
         <div className="centered-view">

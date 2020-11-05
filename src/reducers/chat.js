@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
-import { 
-  CHATS_FETCH_RESTART, 
-  CHATS_FETCH_SUCCESS, 
-  CHATS_JOIN_SUCCESS, 
+import {
+  CHATS_FETCH_RESTART,
+  CHATS_FETCH_SUCCESS,
+  CHATS_JOIN_SUCCESS,
   CHATS_REGISTER_MESSAGE_SUB,
 } from '../actions/types';
 
