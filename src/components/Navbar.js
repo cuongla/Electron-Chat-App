@@ -26,7 +26,11 @@ export default function NavBar({ canGoBack, view }) {
                 <div className="chat-navbar-inner-right">
                     {user &&
                         <>
-                            <img className="avatar mr-2" src={!user.avatar ? DefaultProfilePhoto : user.avatar}></img>
+                            <img 
+                                className="avatar mr-2" 
+                                src={!user.avatar ? DefaultProfilePhoto : user.avatar} 
+                                alt="Profile Photo"
+                                />
                             <span className="logged-in-user">Hi, {user.username}</span>
                             <button
                                 onClick={() => dispatch(logout())}

@@ -157,7 +157,6 @@ a {
 }
 
 .items .item {
-    position: relative;
     width: 100%;
     padding: 10px 1rem;
     cursor: pointer;
@@ -207,7 +206,7 @@ a {
     border-radius: 100px;
     background: #e6ecf3;
     position: absolute;
-    top: 0;
+    top: -10px;
     right: 0;
 }
 
@@ -233,6 +232,7 @@ a {
     display: inline-block;
 }
 
+
 .items .item p.name-time .time {
     font-weight: 400;
     font-size: .7rem;
@@ -241,10 +241,10 @@ a {
 }
 
 @media (max-width: 767px) {
-    .items .item .item-status img {
-        width: 30px;
-        height: 30px;
-    }
+    // .items .item .item-status img {
+    //     width: 30px;
+    //     height: 30px;
+    // }
 
     .items .item p.name-time {
         display: none;

@@ -15,12 +15,11 @@ export default function JoinedChatsList({ chats }) {
                             onClick={() => history.push(`/chat/${chat.id}`)}
                             className="item">
                             <div className="item-status">
-                                {/* <img src={chat.image} alt="Retail Admin" /> */}
                                 <span className="status online"></span>
                             </div>
-                            <p className="name-time">
-                                <span className="name mr-2">{chat.name}</span>
-                            </p>
+                            <div className="item-status">
+                                <span class="status-name">{chat.name}</span>
+                            </div>
                         </li>
                     )
                 }

@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { formatTimeAgo } from '../../utils/Time';
+import DefaultProfilePhoto from '../../assets/DefaultProfilePhoto.png';
+
 
 
 export default function ChatMessagesList({ messages = [], innerRef }) {
@@ -19,7 +21,7 @@ export default function ChatMessagesList({ messages = [], innerRef }) {
                         className={isAuthorOf(message)}>
                         <div className="chat-avatar">
                             <img
-                                src={message?.author.avatar}
+                                src={!message?.author.avatar ? DefaultProfilePhoto : message?.author.avatar}
                                 alt="Retail Admin" />
                             <div className="chat-name">{message?.author.username}</div>
                         </div>

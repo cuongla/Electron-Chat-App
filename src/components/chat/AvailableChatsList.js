@@ -32,7 +32,7 @@ export default function AvailableChatsList({ chats }) {
                                 <p className="card-text">{chat.description}</p>
                                 <button
                                     onClick={() => askForConfirmation(chat)}
-                                    className="btn btn-outline-primary">Join Chat</button>
+                                    className="btn btn-primary">Join Chat</button>
                             </div>
                         </div>
                     </div>

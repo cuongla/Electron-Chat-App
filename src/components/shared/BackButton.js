@@ -6,12 +6,13 @@ export default function BackButton() {
     const history = useHistory();
 
     return (
-        <button
+        <Link
+            to=""
             onClick={() => history.goBack()}
-            className="btn btn-link icon"
+            className="icon"
             style={{ marginRight: '10px' }}
         >
             <i className="fa fa-arrow-circle-o-left"></i>
-        </button>
+        </Link>
     )
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import DefaultProfilePhoto from '../../assets/DefaultProfilePhoto.png';
 
 
 export default function ChatUserList({users = []}) {
@@ -16,7 +17,7 @@ export default function ChatUserList({users = []}) {
             className="item">
             <div className="item-status">
               <img
-                src={user.avatar}
+                src={!user.avatar ? DefaultProfilePhoto : user.avatar} 
                 alt="Retail Admin" />
               <span className={`status ${user.state}`}></span>
             </div>
